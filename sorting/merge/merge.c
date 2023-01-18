@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 void mergesort(float* arr, size_t n);
 
 static void merge(float* left_arr, size_t left_size,
@@ -15,7 +14,6 @@ static void printArr(float* arr, size_t n) {
   }
   printf("\n");
 }
-
 
 int main() {
   size_t n;
@@ -35,7 +33,6 @@ int main() {
   return 0;
 }
 
-
 void mergesort(float* arr, size_t n) {
   if(n <= 1) {
     return;
@@ -54,7 +51,6 @@ void mergesort(float* arr, size_t n) {
   }
   free(merged);
 }
-
 
 static void merge(float* left_arr, size_t left_size,
                   float* right_arr, size_t right_size,
