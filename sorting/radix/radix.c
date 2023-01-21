@@ -1,30 +1,29 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 
-static void copyToBuckets(int*    arr,
-                          size_t  n,
-                          int**   buckets,
-                          size_t* sizes,
-                          size_t  r);
+static void copyToBuckets(unsigned int*  arr,
+                          size_t         n,
+                          unsigned int** buckets,
+                          size_t*        sizes,
+                          size_t         r);
 
-static void copyToArray(int**   buckets,
-                        size_t* sizes,
-                        int*    arr,
-                        size_t  n);
+static void copyToArray(unsigned int** buckets,
+                        size_t*        sizes,
+                        unsigned int*  arr,
+                        size_t         n);
 
-void radixsort(int* arr, size_t n);
+void radixsort(unsigned int* arr, size_t n);
 
-static void printArr(int* arr, size_t n);
+static void printArr(unsigned int* arr, size_t n);
 
 int main() {
   printf("Enter number of elements: ");
   size_t n;
   scanf("%zd", &n);
-  int* arr = calloc(n, sizeof(int));
+  unsigned int* arr = calloc(n, sizeof(unsigned int));
   printf("Enter elements\n");
   for(size_t i=0; i<n; ++i) {
-    scanf("%d", &arr[i]);
+    scanf("%u", &arr[i]);
   }
 
   printf("Elements before sorting...\n");
@@ -37,8 +36,7 @@ int main() {
   return 0;
 }
 
-
-int nthdigit(int x, size_t n) {
+unsigned int nthdigit(unsigned int x, size_t n) {
   while(n) {
     x/= 10;
     n--;
@@ -46,9 +44,6 @@ int nthdigit(int x, size_t n) {
   return x%10;
 }
 
-static size_t abs_p(int n) {
-  return (n<0)?(-n):(n);
-}
 
 size_t ndigits(size_t n) {
   size_t c = 0;
@@ -59,18 +54,18 @@ size_t ndigits(size_t n) {
   return c;
 }
 
-void radixsort(int* arr, size_t n) {
+void radixsort(unsigned int* arr, size_t n) {
   size_t sizes[10];
-  int* buckets[10];
+  unsigned int* buckets[10];
   for(size_t i=0; i<10; ++i) {
-    buckets[i] = calloc(n, sizeof(int));
+    buckets[i] = calloc(n, sizeof(unsigned int));
     sizes[i] = 0;
   }
 
-  size_t max = abs_p(arr[0]);
+  size_t max = arr[0];
   for(size_t i=1; i<n; ++i) {
-    if(abs_p(arr[i]) > max) {
-      max = abs_p(arr[i]);
+    if(arr[i] > max) {
+      max = arr[i];
     }
   }
 
@@ -86,19 +81,18 @@ void radixsort(int* arr, size_t n) {
   }
 }
 
-
-void printArr(int* arr, size_t n) {
+void printArr(unsigned int* arr, size_t n) {
   for(size_t i=0; i<n; ++i) {
-    printf("%d ", arr[i]);
+    printf("%u ", arr[i]);
   }
   printf("\n");
 }
 
-static void copyToBuckets(int*    arr,
-                          size_t  n,
-                          int**   buckets,
-                          size_t* sizes,
-                          size_t  r)
+static void copyToBuckets(unsigned int*  arr,
+                          size_t         n,
+                          unsigned int** buckets,
+                          size_t*        sizes,
+                          size_t         r)
 {
   for(size_t i=0; i<n; ++i) {
     size_t b = nthdigit(arr[i], r);
@@ -108,10 +102,10 @@ static void copyToBuckets(int*    arr,
   }
 }
 
-static void copyToArray(int**   buckets,
-                        size_t* sizes,
-                        int*    arr,
-                        size_t  n)
+static void copyToArray(unsigned int** buckets,
+                        size_t*        sizes,
+                        unsigned int*  arr,
+                        size_t         n)
 {
   size_t ptr = 0;
   for(size_t b=0; b<10; ++b) {
